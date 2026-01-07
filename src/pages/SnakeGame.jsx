@@ -7,11 +7,17 @@ const SnakeGame = ({ user }) => {
     const navigate = useNavigate();
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
-    
+
     const directionRef = useRef("RIGHT");
     const scoreRef = useRef(0);
 
     useEffect(() => {
+        if (gameOver) return;
+
+        directionRef.current = "RIGHT";
+        scoreRef.current = 0;
+        setScore(0);
+
         const handleKeyDown = (e) => {
             const keys = { 37: "LEFT", 38: "UP", 39: "RIGHT", 40: "DOWN" };
             const newDir = keys[e.keyCode];
@@ -21,18 +27,18 @@ const SnakeGame = ({ user }) => {
             if (newDir !== opposites[directionRef.current]) {
                 directionRef.current = newDir;
             }
-            if([37, 38, 39, 40].includes(e.keyCode)) e.preventDefault();
+            if ([37, 38, 39, 40].includes(e.keyCode)) e.preventDefault();
         };
 
         document.addEventListener("keydown", handleKeyDown);
-        
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
         const box = 20;
         let snake = [{ x: 10 * box, y: 10 * box }];
-        let food = { 
-            x: Math.floor(Math.random() * 19) * box, 
-            y: Math.floor(Math.random() * 19) * box 
+        let food = {
+            x: Math.floor(Math.random() * 19) * box,
+            y: Math.floor(Math.random() * 19) * box
         };
 
         const gameLoop = setInterval(() => {
@@ -44,7 +50,7 @@ const SnakeGame = ({ user }) => {
             if (directionRef.current === "DOWN") head.y += box;
 
             // Сблъсък със стени или себе си
-            if (head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || 
+            if (head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 ||
                 snake.some(s => s.x === head.x && s.y === head.y)) {
                 clearInterval(gameLoop);
                 setGameOver(true);
@@ -86,7 +92,7 @@ const SnakeGame = ({ user }) => {
             clearInterval(gameLoop);
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [user]);
+    }, [user, gameOver]);
 
     const saveScore = async (finalScore) => {
         try {
@@ -107,15 +113,15 @@ const SnakeGame = ({ user }) => {
                     <span>ИГРАЧ: {user || "ГОСТ"}</span>
                     <span>РЕЗУЛТАТ: {score}</span>
                 </div>
-                
+
                 <div className="canvas-area">
                     <canvas ref={canvasRef} width="400" height="400"></canvas>
-                    
+
                     {gameOver && (
                         <div className="game-overlay">
                             <h1>КРАЙ</h1>
                             <div className="overlay-btns">
-                                <button className="btn-again" onClick={() => window.location.reload()}>ОПИТАЙ ПАК</button>
+                                <button className="btn-again" onClick={() => setGameOver(false)}>ОПИТАЙ ПАК</button>
                                 <button className="btn-menu" onClick={() => navigate("/")}>МЕНЮ</button>
                             </div>
                         </div>
