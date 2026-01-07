@@ -20,7 +20,7 @@ const Login = ({ setUser }) => {
 
             if (res.ok) {
                 setUser(data.username);
-                navigate("/snake");
+                navigate("/");
             } else {
                 setMsg(data.message);
             }
@@ -34,19 +34,19 @@ const Login = ({ setUser }) => {
             <div className="auth-box">
                 <h2>ВХОД</h2>
                 <form onSubmit={handleLogin}>
-                    <input
-                        type="text"
-                        placeholder="Потребител"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
+                    <input 
+                        type="text" 
+                        placeholder="Потребител" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                        required 
                     />
-                    <input
-                        type="password"
-                        placeholder="Парола"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
+                    <input 
+                        type="password" 
+                        placeholder="Парола" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
                     />
                     <button type="submit" className="btn-primary">ВЛЕЗ</button>
                 </form>

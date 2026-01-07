@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 const Register = ({ setUser }) => {
@@ -22,8 +22,9 @@ const Register = ({ setUser }) => {
             const data = await res.json();
 
             if (res.ok) {
-                setUser(username); // Автоматично логване
-                navigate("/snake");
+                setUser(username);
+                alert("Регистрацията е успешна!");
+                navigate("/");
             } else {
                 setMsg(data.message);
             }
@@ -37,12 +38,37 @@ const Register = ({ setUser }) => {
             <div className="auth-box">
                 <h2>РЕГИСТРАЦИЯ</h2>
                 <form onSubmit={handleRegister}>
-                    <input type="text" placeholder="Потребител" value={username} onChange={(e) => setUsername(e.target.value)} required />
-                    <input type="password" placeholder="Парола" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <input type="password" placeholder="Повтори парола" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        placeholder="Потребител" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                        required 
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Парола" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Повтори парола" 
+                        value={confirmPassword} 
+                        onChange={(e) => setConfirmPassword(e.target.value)} 
+                        required 
+                    />
                     <button type="submit" className="btn-primary">СЪЗДАЙ ПРОФИЛ</button>
                 </form>
+
                 {msg && <p className="error-msg">{msg}</p>}
+                
+                <div className="auth-redirect">
+                    <span>Вече имаш профил? </span>
+                    <Link to="/login" className="redirect-link">Влез тук</Link>
+                </div>
+
                 <button className="btn-back" onClick={() => navigate("/")}>НАЗАД</button>
             </div>
         </div>
