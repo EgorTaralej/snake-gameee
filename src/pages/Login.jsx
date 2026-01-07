@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 const Login = ({ setUser }) => {
@@ -34,11 +34,30 @@ const Login = ({ setUser }) => {
             <div className="auth-box">
                 <h2>ВХОД</h2>
                 <form onSubmit={handleLogin}>
-                    <input type="text" placeholder="Потребител" value={username} onChange={(e) => setUsername(e.target.value)} required />
-                    <input type="password" placeholder="Парола" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input
+                        type="text"
+                        placeholder="Потребител"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Парола"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                     <button type="submit" className="btn-primary">ВЛЕЗ</button>
                 </form>
+
                 {msg && <p className="error-msg">{msg}</p>}
+
+                <div className="auth-redirect">
+                    <span>Нямаш профил? </span>
+                    <Link to="/register" className="redirect-link">Създай го тук</Link>
+                </div>
+
                 <button className="btn-back" onClick={() => navigate("/")}>НАЗАД</button>
             </div>
         </div>
