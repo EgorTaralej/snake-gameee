@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
-const path = require('path'); // Добави това
 
 const app = express();
 const PORT = 3001;
@@ -9,12 +8,17 @@ const DATA_FILE = './users.json';
 
 app.use(cors());
 app.use(express.json());
-
-app.use(express.static(path.join(__dirname, '../dist')));
-
 const getUsers = () => {
-    if (!fs.existsSync(DATA_FILE)) return [];
-    return JSON.parse(fs.readFileSync(DATA_FILE));
+    if (!fs.existsSync(DATA_FILE)) {
+        fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+        return [];
+    }
+    try {
+        const data = fs.readFileSync(DATA_FILE);
+        return JSON.parse(data);
+    } catch (e) {
+        return [];
+    }
 };
 
 app.post('/register', (req, res) => {
@@ -54,8 +58,10 @@ app.post('/score', (req, res) => {
     }
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+app.get('/', (req, res) => {
+    res.send("Сървърът е онлайн!");
 });
 
-app.listen(PORT, () => console.log(`Сървърът работи на http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Сървърът работи на http://localhost:${PORT}`);
+});
