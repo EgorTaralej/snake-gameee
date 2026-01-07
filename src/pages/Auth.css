@@ -1,0 +1,155 @@
+.auth-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a0a0a;
+}
+
+.auth-box {
+    background: #161616;
+    padding: 50px;
+    border-radius: 20px;
+    border: 2px solid #2ecc71;
+    text-align: center;
+    width: 380px;
+    box-shadow: 0 0 25px rgba(46, 204, 113, 0.2);
+}
+
+h1 {
+    color: #2ecc71;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+}
+
+h2 {
+    color: white;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.auth-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #000;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+input:focus {
+    border-color: #2ecc71;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: #2ecc71;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+}
+
+.btn-guest {
+    background: #f1c40f;
+    color: #000;
+}
+
+.btn-guest:hover {
+    background: #d4ac0d;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background: transparent;
+    color: #666;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.btn-back:hover {
+    color: #2ecc71;
+    transform: translateY(-1px);
+}
+
+.auth-redirect {
+    margin-top: 20px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.redirect-link {
+    color: #2ecc71;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.redirect-link:hover {
+    text-decoration: underline;
+    color: #27ae60;
+}
+
+.welcome-text {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.welcome-text span {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.separator {
+    margin: 5px 0;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.error-msg {
+    color: #e74c3c;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
